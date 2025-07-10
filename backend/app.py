@@ -79,7 +79,9 @@ def index():
     return 'Cricket Ball Tracking API. POST a video to /analyze.'
 
 if __name__ == '__main__':
+    # Use the PORT environment variable provided by the deployment platform
+    port = int(os.environ.get('PORT', 5000))
     # Use 0.0.0.0 to make the app accessible on your local network
     # use_reloader=False is important to prevent the server from restarting
     # due to the AI model loading, which can cause connection issues.
-    app.run(host='0.0.0.0', port=5000, debug=True, use_reloader=False) 
+    app.run(host='0.0.0.0', port=port, debug=True, use_reloader=False) 

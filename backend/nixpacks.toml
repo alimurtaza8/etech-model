@@ -16,6 +16,6 @@ nixPkgs = [
 ]
 
 [start]
-# The definitive fix: We prepend the standard system library path to the LD_LIBRARY_PATH
-# at runtime. This ensures the dynamic linker can find the libraries installed by Nix.
-cmd = "LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH gunicorn app:app --bind 0.0.0.0:$PORT" 
+# For debugging, we run the Flask development server directly.
+# This will confirm if the environment itself is correct, isolating Gunicorn as a variable.
+cmd = "python app.py" 
