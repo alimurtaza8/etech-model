@@ -1,8 +1,9 @@
 # nixpacks.toml
 
 [phases.setup]
-# A comprehensive list of system dependencies for OpenCV and Ultralytics
-aptPkgs = ["libgl1", "libglib2.0-0", "libsm6", "libxext6", "libxrender1"]
+# Use the Nix package manager directly for robust, guaranteed dependency handling.
+# This is the definitive solution for providing system libraries on Railway.
+nixPkgs = ["mesa", "glib", "libSM", "libXext", "libXrender"]
 
 [start]
 cmd = "gunicorn app:app --bind 0.0.0.0:$PORT" 
