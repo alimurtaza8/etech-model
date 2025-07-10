@@ -2,21 +2,14 @@
 
 [phases.setup]
 # This is a comprehensive and definitive list of system packages required by
-# OpenCV, Ultralytics, and their transitive dependencies in a modern Linux environment.
-# It includes the Python interpreter itself, graphics drivers, video processing tools, 
-# and font/rendering libraries.
+# the application, including the Python interpreter and the `steam-run` utility.
 nixPkgs = [
   "python312",
-  "libglvnd",
-  "mesa",
-  "glib",
-  "ffmpeg",
-  "xorg.libX11",
-  "xorg.libXext",
-  "xorg.libXrender",
-  "xorg.libSM",
-  "xorg.libICE"
+  "steam-run",
+  "ffmpeg"
 ]
 
 [start]
-cmd = "gunicorn app:app --bind 0.0.0.0:$PORT" 
+# We execute the application inside the `steam-run` FHS environment.
+# This is the definitive solution to ensure all shared libraries are found at runtime.
+cmd = "steam-run gunicorn app:app --bind 0.0.0.0:$PORT" 
