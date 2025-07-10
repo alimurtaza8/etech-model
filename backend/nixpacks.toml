@@ -1,15 +1,21 @@
 # nixpacks.toml
 
 [phases.setup]
-# This is a comprehensive and definitive list of system packages required by
-# the application, including the Python interpreter and the `steam-run` utility.
+# A comprehensive and definitive list of system packages required by the application.
 nixPkgs = [
   "python312",
-  "steam-run",
-  "ffmpeg"
+  "libglvnd",
+  "mesa",
+  "glib",
+  "ffmpeg",
+  "xorg.libX11",
+  "xorg.libXext",
+  "xorg.libXrender",
+  "xorg.libSM",
+  "xorg.libICE"
 ]
 
 [start]
-# We execute the application inside the `steam-run` FHS environment.
-# This is the definitive solution to ensure all shared libraries are found at runtime.
-cmd = "steam-run gunicorn app:app --bind 0.0.0.0:$PORT" 
+# The definitive fix: We prepend the standard system library path to the LD_LIBRARY_PATH
+# at runtime. This ensures the dynamic linker can find the libraries installed by Nix.
+cmd = "LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH gunicorn app:app --bind 0.0.0.0:$PORT" 
