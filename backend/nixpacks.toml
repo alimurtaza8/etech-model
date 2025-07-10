@@ -1,11 +1,12 @@
 # nixpacks.toml
 
 [phases.setup]
-# Use the Nix package manager directly for robust, guaranteed dependency handling.
-# This configuration provides both the OpenGL library provider (mesa) 
-# and the dispatcher (libglvnd) to ensure the library is available at runtime.
+# Use the Nix package manager to build a self-contained FHS environment.
+# This is the definitive solution for ensuring the application can find all
+# of its native library dependencies at runtime.
 nixPkgs = [
-  "python312",
+  "python311",
+  "pkgs.python311.pkgs.build-python-FHS-env",
   "libglvnd",
   "mesa",
   "glib"
