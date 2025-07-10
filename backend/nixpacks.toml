@@ -1,14 +1,17 @@
 # nixpacks.toml
 
-[providers]
-python = "3.12"
+# Specify the providers as a sequence (array), which is the correct syntax.
+providers = ["python"]
+
+[variables]
+# Explicitly set the Python version for the Nixpacks builder.
+NIXPACKS_PYTHON_VERSION = "3.12"
 
 [phases.setup]
 # This is a comprehensive and definitive list of system packages required by
 # OpenCV, Ultralytics, and their transitive dependencies in a modern Linux environment.
 # It includes graphics drivers, video processing tools, and font/rendering libraries.
 nixPkgs = [
-  "python312",
   "libglvnd",
   "mesa",
   "glib",
