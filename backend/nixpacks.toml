@@ -16,6 +16,7 @@ nixPkgs = [
 ]
 
 [start]
-# For debugging, we run the Flask development server directly.
-# This will confirm if the environment itself is correct, isolating Gunicorn as a variable.
-cmd = "python app.py" 
+# The definitive fix: We prepend the NIXPACKS_LIBS_PATH (provided by the build system)
+# to the LD_LIBRARY_PATH at runtime. This is the correct and final way to ensure
+# the application can find all of its shared libraries on this platform.
+cmd = "LD_LIBRARY_PATH=$NIXPACKS_LIBS_PATH:$LD_LIBRARY_PATH gunicorn app:app --bind 0.0.0.0:$PORT" 
