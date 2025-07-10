@@ -3,14 +3,11 @@
 [phases.setup]
 # Use the Nix package manager directly for robust, guaranteed dependency handling.
 # This is the definitive solution for providing system libraries on Railway.
-# The package names are fully qualified to match the NixOS repository structure.
+# `libglvnd` is the specific package for making libGL.so.1 discoverable at runtime.
 nixPkgs = [
   "python312",
-  "mesa", 
-  "glib", 
-  "xorg.libSM", 
-  "xorg.libXext", 
-  "xorg.libXrender"
+  "libglvnd",
+  "glib"
 ]
 
 [start]
