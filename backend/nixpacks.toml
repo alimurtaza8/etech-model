@@ -3,7 +3,14 @@
 [phases.setup]
 # Use the Nix package manager directly for robust, guaranteed dependency handling.
 # This is the definitive solution for providing system libraries on Railway.
-nixPkgs = ["mesa", "glib", "libSM", "libXext", "libXrender"]
+# The package names are fully qualified to match the NixOS repository structure.
+nixPkgs = [
+  "mesa", 
+  "glib", 
+  "xorg.libSM", 
+  "xorg.libXext", 
+  "xorg.libXrender"
+]
 
 [start]
 cmd = "gunicorn app:app --bind 0.0.0.0:$PORT" 
