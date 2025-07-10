@@ -1,0 +1,24 @@
+# nixpacks.toml
+
+[providers]
+python = "3.12"
+
+[phases.setup]
+# This is a comprehensive and definitive list of system packages required by
+# OpenCV, Ultralytics, and their transitive dependencies in a modern Linux environment.
+# It includes graphics drivers, video processing tools, and font/rendering libraries.
+nixPkgs = [
+  "python312",
+  "libglvnd",
+  "mesa",
+  "glib",
+  "ffmpeg",
+  "xorg.libX11",
+  "xorg.libXext",
+  "xorg.libXrender",
+  "xorg.libSM",
+  "xorg.libICE"
+]
+
+[start]
+cmd = "gunicorn app:app --bind 0.0.0.0:$PORT" 
