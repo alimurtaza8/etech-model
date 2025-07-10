@@ -16,6 +16,7 @@ nixPkgs = [
 ]
 
 [start]
-# Diagnostic step: Print all environment variables to the log, then attempt to start.
-# This will show us the value of NIXPACKS_LIBS_PATH and other critical variables.
-cmd = "env && echo '--- Starting Gunicorn ---' && LD_LIBRARY_PATH=$NIXPACKS_LIBS_PATH:$LD_LIBRARY_PATH gunicorn app:app --bind 0.0.0.0:$PORT" 
+# The definitive fix: We prepend the LIBRARY_PATH (discovered from the logs)
+# to the LD_LIBRARY_PATH at runtime. This is the correct and final way to ensure
+# the application can find all of its shared libraries on this platform.
+cmd = "LD_LIBRARY_PATH=$LIBRARY_PATH:$LD_LIBRARY_PATH gunicorn app:app --bind 0.0.0.0:$PORT" 
