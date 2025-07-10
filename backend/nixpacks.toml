@@ -5,6 +5,7 @@
 # This is the definitive solution for providing system libraries on Railway.
 # The package names are fully qualified to match the NixOS repository structure.
 nixPkgs = [
+  "python312",
   "mesa", 
   "glib", 
   "xorg.libSM", 
